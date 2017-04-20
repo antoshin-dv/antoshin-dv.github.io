@@ -55,12 +55,6 @@ body {
 	left: 46%;
 }
 
-#coupon {
-	position: fixed;
-	top: 80%;
-	left: -90px;
-}
-
 #coupon a, img {
 	border: none;
 }
