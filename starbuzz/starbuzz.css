@@ -49,6 +49,12 @@ body {
 	float: right;
 }
 
+#award {
+	position: absolute;
+	top: 30px;
+	left: 46%;
+}
+
 h1 {
 	font-size: 120%;
 	color: #954b4b;
