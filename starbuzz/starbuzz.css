@@ -45,6 +45,10 @@ body {
 	font-size: 90%;
 }
 
+#headerSlogan {
+	float: right;
+}
+
 h1 {
 	font-size: 120%;
 	color: #954b4b;
