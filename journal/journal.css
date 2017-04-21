@@ -27,3 +27,40 @@ h2 {
 blockquote {
 	font-style: italic;
 }
+
+table {
+	margin: 0 20px;
+	border: thin solid black;
+	caption-side: bottom;
+	border-collapse: collapse;
+}
+
+td, th {
+	border: thin dotted gray;
+	padding: 5px;
+}
+
+table table th {
+	background-color: white;
+}
+
+th {
+	background-color: #cc6600;
+}
+
+caption {
+	font-style: italic;
+	padding-top: 8px;
+}
+
+.tableCenter {
+	text-align: center;
+}
+
+.tableRight {
+	text-align: right;
+}
+
+.cellcolor {
+	background-color: #fcba7a;
+}
