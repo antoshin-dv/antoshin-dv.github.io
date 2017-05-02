@@ -1,45 +1,32 @@
-﻿/* var rand = 1 + Math.floor(Math.random() * 5);
-var location1 = rand;
-var location2 = rand + 1;
-var location3 = rand + 2;
-
-var guess;
-var hits = 0;
-var guesses = 0;
-
-var isSunk = false;
-
-while (!isSunk)
+﻿var view = 
 {
-	guess = prompt("Готовься! Цель! Огонь! (Введите число от 1 до 7):");
-	if (guess < 1 || guess > 7)
+	displayMessage: function(msg)
 	{
-		alert("Введите корректное число.");
-	}
-	else
+		var messageArea = document.getElementById("messageArea");
+		if (messageArea)
+			messageArea.innerHTML = msg;
+	},
+	displayHit: function(location)
 	{
-		guesses = guesses + 1;
-	}
-	
-	if (guess == location1 || guess == location2 || guess == location3)
+		var cell = document.getElementById(location);
+		if (cell)
+			cell.setAttribute("class", "hit");
+	},
+	displayMiss: function(location)
 	{
-		hits = hits + 1;
-		if (hits == 3)
-		{
-			isSunk = true;
-			alert("Потопил!");
-		}
-		else
-		{
-			alert("Ранил");
-		}
+		var cell = document.getElementById(location);
+		if (cell)
+			cell.setAttribute("class", "miss");
 	}
-	else
-	{
-		alert("Мимо");
-	}
-}
+};
 
-var stats = "Ты сделал " + guesses + " выстрелов чтобы потопить корабль. " +
-			"Твоя точность: " + (3/guesses);
-alert(stats); */
+view.displayMessage("Да начнётся тестирование.");
+var userFire = ["A0", "D4", "F5", "B2", "C5", "C6"];
+var isHit = [false, true, false, true, false, true];
+for (var i = 0; i < userFire.length; i++)
+{
+	if (isHit[i])
+		view.displayHit(userFire[i]);
+	else
+		view.displayMiss(userFire[i]);
+}
