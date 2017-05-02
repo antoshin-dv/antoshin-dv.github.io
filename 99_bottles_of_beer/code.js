@@ -1,13 +1,13 @@
 ﻿var count = 99;
 while (count > 0)
 {
-	document.write(GetNumber(count) + " " + GetButtles(count) + " пива на стене<br>");
-	document.write(GetNumber(count) + " " + GetButtles(count) + " пива!<br>");
+	document.write(toTitle(GetNumber(count) + " " + GetButtles(count) + " пива на стене<br>"));
+	document.write(toTitle(GetNumber(count) + " " + GetButtles(count) + " пива!<br>"));
 	document.write("<b>Возьми одну</b>, пусти по кругу<br>");
 	count = count - 1;
 	if (count > 0)
 	{
-		document.write(GetNumber(count) + " " + GetButtles(count) + " пива на стене!<br>");
+		document.write(toTitle(GetNumber(count) + " " + GetButtles(count) + " пива на стене!<br>"));
 	}
 	else
 	{
@@ -26,6 +26,8 @@ function GetNumber(count)
 		"шестьдесят", "семьдесят", "восемьдесят", "девяносто"];
 		
 	var number;
+	if (isNaN(count))
+		return "";
 	if (count <= 0 || count >= 100)
 		return number;
 	
@@ -43,7 +45,10 @@ function GetNumber(count)
 		if (count / 10 > 1)
 			pos1 = str_20_90[Math.floor(count / 10) - 2];
 		
-		number = pos1 + " " + pos0;
+		if (pos1.length == 0)
+			number = pos0;
+		else
+			number = pos1 + " " + pos0;
 	}
 	
 	return number;
@@ -61,4 +66,14 @@ function GetButtles(count)
 		word = "бутылка";
 	
 	return word;
+}
+
+function toTitle(str)
+{
+	var ret;
+	
+	if (str.length == 0)
+		return str;
+	
+	return str[0].toUpperCase() + str.substr(1).toLowerCase();
 }
