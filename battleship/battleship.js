@@ -1,4 +1,4 @@
-﻿var rand = 1 + Math.floor(Math.random() * 5);
+﻿/* var rand = 1 + Math.floor(Math.random() * 5);
 var location1 = rand;
 var location2 = rand + 1;
 var location3 = rand + 2;
@@ -42,4 +42,4 @@ while (!isSunk)
 
 var stats = "Ты сделал " + guesses + " выстрелов чтобы потопить корабль. " +
 			"Твоя точность: " + (3/guesses);
-alert(stats);
+alert(stats); */

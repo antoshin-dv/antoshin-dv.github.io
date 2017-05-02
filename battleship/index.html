@@ -1,0 +1,51 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Морской бой</title>
+	<link rel="stylesheet" href="./battleship.css" />
+</head>
+<body>
+	<section id="board">
+		<div id="messageArea">Сыграем в Морской бой</div>
+	
+		<table>
+			<tr>
+				<td id="A0" class="miss"></td><td id="A1"></td><td id="A2"></td><td id="A3"></td>
+				<td id="A4"></td><td id="A5"></td><td id="A6" class="hit"></td>
+			</tr>
+			<tr>
+				<td id="B0"></td><td id="B1"></td><td id="B2" class="miss"></td><td id="B3"></td>
+				<td id="B4"></td><td id="B5"></td><td id="B6" class="hit"></td>
+			</tr>
+			<tr>
+				<td id="C0"></td><td id="C1"></td><td id="C2"></td><td id="C3"></td>
+				<td id="C4" class="hit"></td><td id="C5" class="miss"></td><td id="C6" class="hit"></td>
+			</tr>
+			<tr>
+				<td id="D0"></td><td id="D1"></td><td id="D2"></td><td id="D3"></td>
+				<td id="D4" class="hit"></td><td id="D5"></td><td id="D6"></td>
+			</tr>
+			<tr>
+				<td id="E0"></td><td id="E1"></td><td id="E2"></td><td id="E3"></td>
+				<td id="E4" class="hit"></td><td id="E5"></td><td id="E6"></td>
+			</tr>
+			<tr>
+				<td id="F0"></td><td id="F1"></td><td id="F2"></td><td id="F3"></td>
+				<td id="F4"></td><td id="F5" class="miss"></td><td id="F6"></td>
+			</tr>
+			<tr>
+				<td id="G0" class="hit"></td><td id="G1" class="hit"></td><td id="G2" class="hit"></td><td id="G3"></td>
+				<td id="G4"></td><td id="G5"></td><td id="G6"></td>
+			</tr>
+		</table>
+	
+		<form>
+			<input type="text" id="guessInput" placeholder="A0" />
+			<input type="button" id="fireButton" value="Огонь!" />
+		</form>
+	</section>
+	
+	<script src="./battleship.js"></script>
+</body>
+</html>
