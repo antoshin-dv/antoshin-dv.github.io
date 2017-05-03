@@ -30,9 +30,9 @@ var model =
 	shipsSunk: 0,
 	ships: 
 	[
-		{ locations: ["B0", "C0", "D0"], hits: [false, false, false] },
-		{ locations: ["D2", "D3", "D4"], hits: [false, false, false] },
-		{ locations: ["G3", "G4", "G5"], hits: [false, false, false] }
+		{ locations: [0, 0, 0], hits: [false, false, false] },
+		{ locations: [0, 0, 0], hits: [false, false, false] },
+		{ locations: [0, 0, 0], hits: [false, false, false] }
 	],
 	
 	fire: function(location)
@@ -66,6 +66,64 @@ var model =
 			if (!ship.hits[i])
 				return false;
 		return true;
+	},
+	
+	generateShipLocations: function()
+	{
+		var locations;
+		for (var i = 0; i < this.numShips; i++)
+		{
+			do
+			{
+				locations = this.generateShip();
+			}while (this.Collision(locations));
+			this.ships[i].locations = locations;
+		}
+	},
+	
+	generateShip: function()
+	{
+		var direction = Math.floor(Math.random() * 2);
+		var row, col;
+		if (direction === 1)
+		{
+			row = Math.floor(Math.random() * this.boardSize);
+			col = Math.floor(Math.random() * (this.boardSize - this.shipLength));
+		}
+		else
+		{
+			row = Math.floor(Math.random() * (this.boardSize - this.shipLength));
+			col = Math.floor(Math.random() * this.boardSize);
+		}
+		
+		var newShipLocations = [];
+		for (var i = 0; i < this.shipLength; i++)
+		{
+			if (direction === 1)
+				newShipLocations.push(this.getChar(row) + (col + i));
+			else
+				newShipLocations.push(this.getChar(row + i) + col);
+		}
+		
+		return newShipLocations;
+	},
+	
+	getChar: function(number)
+	{
+		var codeA = "A".charCodeAt(0);
+		return String.fromCharCode(codeA + number);
+	},
+	
+	Collision: function(locations)
+	{
+		for (var i = 0; i < this.numShips; i++)
+		{
+			var ship = model.ships[i];
+			for (var j = 0; j < locations.length; j++)
+				if (ship.locations.indexOf(locations[j]) >= 0)
+					return true;
+		}
+		return false;
 	}
 };
 
@@ -79,7 +137,6 @@ var controller =
 		var newLocation = this.checkGuess(location);
 		if (newLocation)
 		{
-			console.log(newLocation);
 			this.guesses++;
 			var hit = model.fire(newLocation);
 			if (hit && model.shipsSunk === model.numShips)
@@ -116,6 +173,8 @@ function init()
 	var guessInput = document.getElementById("guessInput");
 	if (guessInput)
 		guessInput.onkeypress = handleKeyPress;
+	
+	model.generateShipLocations();
 }
 
 function handleFireButton()
@@ -144,8 +203,3 @@ function handleKeyPress(e)
 }
 
 window.onload = init;
-
-/* var userFire = ["A0", "D4", "F5", "B2", "C5", "C6", "C0", "D0", "B0",
-	"D2", "D3", "G3", "G4", "G5"];
-for (var i = 0; i < userFire.length; i++)
-	controller.processGuess(userFire[i]); */
