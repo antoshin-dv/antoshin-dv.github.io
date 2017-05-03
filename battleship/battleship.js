@@ -76,37 +76,76 @@ var controller =
 	
 	processGuess: function(location)
 	{
-		if (this.checkGuess(location))
+		var newLocation = this.checkGuess(location);
+		if (newLocation)
 		{
+			console.log(newLocation);
 			this.guesses++;
-			var hit = model.fire(location);
+			var hit = model.fire(newLocation);
 			if (hit && model.shipsSunk === model.numShips)
 				view.displayMessage("Вы победили");
 		}
-		return this.guesses;
 	},
 	
 	checkGuess: function(location)
 	{
 		if (location === null || location.length !== 2)
-			return false;
+			return null;
 		
 		// Первый символ должен принимать значение от А до А+размер поля
 		var codeCh = location[0].toUpperCase().charCodeAt(0);
 		var codeA = "A".charCodeAt(0);
 		if (codeCh < codeA || (codeCh >= codeA + model.boardSize))
-			return false;
-		
+			return null;
+
 		// Второй символ должен быть числом от 0 до размера поля
 		var col = location[1];
 		if (isNaN(col) || col < 0 || col >= model.boardSize)
-			return false;
+			return null;
 		
-		return true;
+		return String.fromCharCode(codeCh) + col;
 	}
 }
 
-var userFire = ["A0", "D4", "F5", "B2", "C5", "C6", "C0", "D0", "B0",
+function init()
+{
+	var fireButton = document.getElementById("fireButton");
+	if (fireButton)
+		fireButton.onclick = handleFireButton;
+	
+	var guessInput = document.getElementById("guessInput");
+	if (guessInput)
+		guessInput.onkeypress = handleKeyPress;
+}
+
+function handleFireButton()
+{
+	var guessInput = document.getElementById("guessInput");
+	if (guessInput)
+	{
+		var guess = guessInput.value;
+		controller.processGuess(guess);
+		
+		guessInput.value = "";
+	}
+}
+
+function handleKeyPress(e)
+{
+	if (e.keyCode === 13)
+	{
+		var fireButton = document.getElementById("fireButton");
+		if (fireButton) 
+		{
+			fireButton.click();
+			return false;
+		}
+	}		
+}
+
+window.onload = init;
+
+/* var userFire = ["A0", "D4", "F5", "B2", "C5", "C6", "C0", "D0", "B0",
 	"D2", "D3", "G3", "G4", "G5"];
 for (var i = 0; i < userFire.length; i++)
-	controller.processGuess(userFire[i]);
+	controller.processGuess(userFire[i]); */
