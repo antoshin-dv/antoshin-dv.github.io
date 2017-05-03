@@ -69,6 +69,44 @@ var model =
 	}
 };
 
-var userFire = ["A0", "D4", "F5", "B2", "C5", "C6", "C0", "D0"];
+// Контроллер
+var controller =
+{
+	guesses: 0,
+	
+	processGuess: function(location)
+	{
+		if (this.checkGuess(location))
+		{
+			this.guesses++;
+			var hit = model.fire(location);
+			if (hit && model.shipsSunk === model.numShips)
+				view.displayMessage("Вы победили");
+		}
+		return this.guesses;
+	},
+	
+	checkGuess: function(location)
+	{
+		if (location === null || location.length !== 2)
+			return false;
+		
+		// Первый символ должен принимать значение от А до А+размер поля
+		var codeCh = location[0].toUpperCase().charCodeAt(0);
+		var codeA = "A".charCodeAt(0);
+		if (codeCh < codeA || (codeCh >= codeA + model.boardSize))
+			return false;
+		
+		// Второй символ должен быть числом от 0 до размера поля
+		var col = location[1];
+		if (isNaN(col) || col < 0 || col >= model.boardSize)
+			return false;
+		
+		return true;
+	}
+}
+
+var userFire = ["A0", "D4", "F5", "B2", "C5", "C6", "C0", "D0", "B0",
+	"D2", "D3", "G3", "G4", "G5"];
 for (var i = 0; i < userFire.length; i++)
-	model.fire(userFire[i]);
+	controller.processGuess(userFire[i]);
