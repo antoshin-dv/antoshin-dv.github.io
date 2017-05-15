@@ -29,14 +29,6 @@ section#board td {
 	height: 96px;
 }
 
-section#board form {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	padding: 15px;
-	background-color: rgb(83, 175, 19);
-}
-
 section#board form input {
 	background-color: rgb(152, 207, 113);
 	border-color: rgb(83, 175, 19);

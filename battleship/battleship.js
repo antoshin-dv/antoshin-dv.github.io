@@ -166,40 +166,16 @@ var controller =
 
 function init()
 {
-	var fireButton = document.getElementById("fireButton");
-	if (fireButton)
-		fireButton.onclick = handleFireButton;
-	
-	var guessInput = document.getElementById("guessInput");
-	if (guessInput)
-		guessInput.onkeypress = handleKeyPress;
+	var tds = document.getElementsByTagName("td");
+	for (var i = 0; i < tds.length; i++)
+		tds[i].onclick = OnFire;
 	
 	model.generateShipLocations();
 }
 
-function handleFireButton()
+function OnFire(eventObj)
 {
-	var guessInput = document.getElementById("guessInput");
-	if (guessInput)
-	{
-		var guess = guessInput.value;
-		controller.processGuess(guess);
-		
-		guessInput.value = "";
-	}
-}
-
-function handleKeyPress(e)
-{
-	if (e.keyCode === 13)
-	{
-		var fireButton = document.getElementById("fireButton");
-		if (fireButton) 
-		{
-			fireButton.click();
-			return false;
-		}
-	}		
+	controller.processGuess(eventObj.target.id);
 }
 
 window.onload = init;
